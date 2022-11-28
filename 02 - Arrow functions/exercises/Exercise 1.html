@@ -32,16 +32,25 @@
 <script>
 
   // Select all the list items on the page and convert to array
+  const items =  Array.from(document.getElementsByTagName("li"));
 
   // Filter for only the elements that contain the word 'Flexbox'
+  const flexboxItems = items.filter(item => item.textContent.includes("Flexbox"));
 
   // map down to a list of time strings
+  const timeStrings = flexboxItems.map(item => item.dataset.time);
 
   // map to an array of seconds
+  const timeStringsInSeconds = timeStrings.map(timeString => {
+    const [minutes, seconds] = timeString.split(":");
+    return parseFloat(minutes) * 60 + parseFloat(seconds);
+  });
 
   // reduce to get total
+  const total = timeStringsInSeconds.reduce((total, seconds) => total + seconds, 0);
 
-  // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
+  console.log(total);
+
 
 </script>
 </body>
